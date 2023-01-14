@@ -1,6 +1,5 @@
 package com.pessoa.api.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.pessoa.api.dto.PessoaDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,12 +25,17 @@ public class Pessoa implements Serializable {
 
     @Column(name = "data_nascimento")
     private Date dataNascimento;
-    @OneToMany(mappedBy = "pessoa")
+
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Endereco> endereco = new ArrayList<>();
 
-    public Pessoa(PessoaDto pessoaDto) {
-        this.nome = pessoaDto.nome();
-        this.dataNascimento = pessoaDto.dataNascimento();
-        this.endereco = getEndereco();
+    public Pessoa(String nome, Date dataNascimento) {
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
     }
+
+    public void adicionarEndereco(Endereco endereco){
+        this.endereco.add(endereco);
+    }
+
 }

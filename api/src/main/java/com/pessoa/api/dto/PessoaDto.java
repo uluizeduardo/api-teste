@@ -1,5 +1,6 @@
 package com.pessoa.api.dto;
 
+import com.pessoa.api.entities.Endereco;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 

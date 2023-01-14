@@ -19,7 +19,7 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
 
     public Endereco cadastrarEndereco(EnderecoDto enderecoDto){
-        Endereco endereco = enderecoRepository.save(converteObjetoDto(enderecoDto ,pessoaRepository));
+        Endereco endereco = enderecoRepository.save(converteObjetoDto(enderecoDto, pessoaRepository));
         return endereco;
     }
 
