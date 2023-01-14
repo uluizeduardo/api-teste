@@ -36,6 +36,6 @@ public class Endereco implements Serializable {
         this.cep = enderecoDto.cep();
         this.numero = enderecoDto.numero();
         this.cidade = enderecoDto.cidade();
-        this.pessoa = new Pessoa(enderecoDto.pessoaDto());
+        this.pessoa = enderecoDto.pessoa();
     }
 }

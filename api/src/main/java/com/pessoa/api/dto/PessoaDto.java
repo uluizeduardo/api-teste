@@ -9,8 +9,5 @@ public record PessoaDto(
         @NotBlank
         String nome,
 
-        Date dataNascimento,
-        @NotBlank
-        @Valid
-        EnderecoDto enderecoDto) {
+        Date dataNascimento) {
 }

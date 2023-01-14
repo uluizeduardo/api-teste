@@ -2,8 +2,6 @@ package com.pessoa.api.entities;
 
 import com.pessoa.api.dto.PessoaDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
@@ -33,6 +31,5 @@ public class Pessoa implements Serializable {
     public Pessoa(PessoaDto pessoaDto) {
         this.nome = pessoaDto.nome();
         this.dataNascimento = pessoaDto.dataNascimento();
-        this.endereco = (List<Endereco>) new Endereco(pessoaDto.enderecoDto());
     }
 }
