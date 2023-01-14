@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -31,11 +32,12 @@ public class Endereco implements Serializable {
 
     @ManyToOne
     private Pessoa pessoa;
-    public Endereco(EnderecoDto enderecoDto) {
-        this.lougradouro = enderecoDto.logradouro();
-        this.cep = enderecoDto.cep();
-        this.numero = enderecoDto.numero();
-        this.cidade = enderecoDto.cidade();
-        this.pessoa = enderecoDto.pessoa();
+
+    public Endereco(String lougradouro, int cep, String numero, String cidade, Pessoa pessoa) {
+        this.lougradouro = lougradouro;
+        this.cep = cep;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.pessoa = pessoa;
     }
 }

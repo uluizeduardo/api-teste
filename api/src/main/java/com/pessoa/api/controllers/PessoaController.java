@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/pessoa")
 public class PessoaController {
@@ -16,7 +18,11 @@ public class PessoaController {
 
     @PostMapping
     public void cadastrarPessoa(@RequestBody @Valid PessoaDto pessoaDto){
-        System.out.println(pessoaDto);
         pessoaRepository.save(new Pessoa(pessoaDto));
     }
+
+    /*@PostMapping
+    public ResponseEntity<Pessoa> cadastrarPessoa(@RequestBody @Valid PessoaDto pessoaDto){
+        return new ResponseEntity<Pessoa>(pessoaService.cadastrarPessoa(pessoaDto), HttpStatus.CREATED);
+    }*/
 }
