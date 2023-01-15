@@ -3,6 +3,7 @@ package com.pessoa.api.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.List;
 @Table(name = "pessoa")
 @Entity
 public class Pessoa implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +27,13 @@ public class Pessoa implements Serializable {
     @Column(name = "data_nascimento")
     private Date dataNascimento;
 
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Endereco> endereco = new ArrayList<>();
 
-    public Pessoa(String nome, Date dataNascimento) {
+    public Pessoa(String nome, Date dataNascimento, List<Endereco> endereco) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
     }
 
 }

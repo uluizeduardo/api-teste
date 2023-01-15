@@ -6,6 +6,7 @@ import com.pessoa.api.entities.Pessoa;
 import com.pessoa.api.repositories.EnderecoRepository;
 import com.pessoa.api.repositories.PessoaRepository;
 import jakarta.transaction.Transactional;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,10 @@ public class EnderecoService {
                             enderecoDto.numero(),
                             enderecoDto.cidade(),
                             pessoa.get());
+    }
+
+    public  Optional<Endereco> buscarEndereco(Long enderecoId) {
+        return  enderecoRepository.findById(enderecoId);
     }
 
 }

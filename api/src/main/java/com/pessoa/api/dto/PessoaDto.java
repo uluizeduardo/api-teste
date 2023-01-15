@@ -10,6 +10,8 @@ public record PessoaDto(
         String nome,
 
 
-        Date dataNascimento) {
+        Date dataNascimento,
+
+        Long idEndereco) {
 
 }
