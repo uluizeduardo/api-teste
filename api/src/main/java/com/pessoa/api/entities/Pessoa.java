@@ -1,6 +1,5 @@
 package com.pessoa.api.entities;
 
-import com.pessoa.api.dto.PessoaDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,10 +31,6 @@ public class Pessoa implements Serializable {
     public Pessoa(String nome, Date dataNascimento) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-    }
-
-    public void adicionarEndereco(Endereco endereco){
-        this.endereco.add(endereco);
     }
 
 }

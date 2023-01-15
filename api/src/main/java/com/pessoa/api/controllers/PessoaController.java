@@ -26,4 +26,13 @@ public class PessoaController {
     public ResponseEntity<Pessoa> cadastrarPessoa(@RequestBody @Valid PessoaDto pessoaDto){
         return new ResponseEntity<Pessoa>(pessoaService.cadastrarPessoa(pessoaDto), HttpStatus.CREATED);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> buscarPessoa(@PathVariable(value = "id") Long id){
+        Optional<Pessoa> pessoa = pessoaService.buscarPessoa(id);
+        if (!pessoa.isPresent()){
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(pessoa.get());
+    }
 }
