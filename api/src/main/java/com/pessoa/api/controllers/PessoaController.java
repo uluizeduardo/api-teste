@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -39,5 +40,10 @@ public class PessoaController {
     @PutMapping("/{id}")
     public ResponseEntity<Pessoa> editarPessoa(@PathVariable(value = "id") Long id, @RequestBody @Valid PessoaDto pessoaDto){
         return new ResponseEntity<Pessoa>(pessoaService.editarPessoa(pessoaDto, id), HttpStatus.OK);
+    }
+
+    @GetMapping("listarPessoas")
+    public ResponseEntity<List<Pessoa>> listarPessoas(){
+        return new ResponseEntity<List<Pessoa>>(pessoaService.buscarPessoas(), HttpStatus.OK);
     }
 }

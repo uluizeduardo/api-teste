@@ -59,4 +59,8 @@ public class PessoaService {
     public Optional<Pessoa> buscarPessoa(Long pessoaId) {
         return pessoaRepository.findById(pessoaId);
     }
+
+    public List<Pessoa> buscarPessoas() {
+        return pessoaRepository.findAll();
+    }
 }
