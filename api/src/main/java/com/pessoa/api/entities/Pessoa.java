@@ -1,5 +1,6 @@
 package com.pessoa.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,13 +28,12 @@ public class Pessoa implements Serializable {
     @Column(name = "data_nascimento")
     private Date dataNascimento;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Endereco> endereco = new ArrayList<>();
 
-    public Pessoa(String nome, Date dataNascimento, List<Endereco> endereco) {
+    public Pessoa(String nome, Date dataNascimento) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
     }
-
 }

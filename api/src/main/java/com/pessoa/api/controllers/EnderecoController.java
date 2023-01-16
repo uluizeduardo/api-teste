@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,17 +29,23 @@ public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
 
-    @PostMapping
+    @PostMapping(value = "/cadastrarEndereco")
     public ResponseEntity<Endereco> cadastrarEndereco(@RequestBody @Valid EnderecoDto enderecoDto){
         return new ResponseEntity<Endereco>(enderecoService.cadastrarEndereco(enderecoDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> buscarEndereco(@PathVariable(value = "id") Long id){
-        Optional<Endereco> endereco = enderecoService.buscarEndereco(id);
-        if (!endereco.isPresent()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Endereco não encontrado");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(endereco.get());
+    @GetMapping(value = "/buscarEndereco/{id}")
+    public ResponseEntity<Endereco> buscarEndereco(@PathVariable(value = "id") Long id){
+        return new ResponseEntity<Endereco>(enderecoService.buscarEnderecoPorId(id), HttpStatus.OK);
+    }
+
+    @GetMapping( value = "/listarEnderecos")
+    public ResponseEntity<List<Endereco>> listarTodosEnderecos(){
+        return new ResponseEntity<List<Endereco>>(enderecoService.buscarTodosEnderecos(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/listarEnderecosPessoa/{id}")
+    public ResponseEntity<List<Endereco>> listarEnderecosPessoa(@PathVariable(value = "id") Long id){
+        return new ResponseEntity<List<Endereco>>(enderecoService.buscarEnderecosPessoa(id), HttpStatus.OK);
     }
 }

@@ -23,26 +23,22 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
-    @PostMapping
+    @PostMapping(value = "/cadastrarPessoa")
     public ResponseEntity<Pessoa> cadastrarPessoa(@RequestBody @Valid PessoaDto pessoaDto){
         return new ResponseEntity<Pessoa>(pessoaService.cadastrarPessoa(pessoaDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> buscarPessoa(@PathVariable(value = "id") Long id){
-        Optional<Pessoa> pessoa = pessoaService.buscarPessoa(id);
-        if (!pessoa.isPresent()){
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(pessoa.get());
+    @GetMapping(value = "/buscarPessoa/{id}")
+    public ResponseEntity<Pessoa> buscarPessoaPorId(@PathVariable(value = "id") Long id){
+        return new ResponseEntity<Pessoa>(pessoaService.buscarPessoaPorId(id), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/editarPessoa/{id}")
     public ResponseEntity<Pessoa> editarPessoa(@PathVariable(value = "id") Long id, @RequestBody @Valid PessoaDto pessoaDto){
         return new ResponseEntity<Pessoa>(pessoaService.editarPessoa(pessoaDto, id), HttpStatus.OK);
     }
 
-    @GetMapping("listarPessoas")
+    @GetMapping(value = "/listarPessoas")
     public ResponseEntity<List<Pessoa>> listarPessoas(){
         return new ResponseEntity<List<Pessoa>>(pessoaService.buscarPessoas(), HttpStatus.OK);
     }
