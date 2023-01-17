@@ -41,6 +41,9 @@ public class EnderecoService {
 
     public Endereco buscarEnderecoPorId(Long id) {
         Endereco endereco = enderecoRepository.findById(id).orElse(null);
+        if(endereco == null){
+            throw new RuntimeException("Endereco não encontrada");
+        }
         return endereco;
     }
 

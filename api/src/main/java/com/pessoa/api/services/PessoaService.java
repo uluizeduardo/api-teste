@@ -29,7 +29,7 @@ public class PessoaService {
     public Pessoa editarPessoa(PessoaDto pessoaDto, Long id){
         Pessoa pessoa = pessoaRepository.findById(id).orElse(null);
         if(pessoa == null){
-            //criar exception
+            throw new RuntimeException("Pessoa não encontrada");
         }
         pessoa.setNome(pessoaDto.nome());
         pessoa.setDataNascimento(pessoaDto.dataNascimento());
@@ -45,6 +45,9 @@ public class PessoaService {
 
     public Pessoa buscarPessoaPorId(Long pessoaId) {
        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElse(null);
+        if(pessoa == null){
+            throw new RuntimeException("Pessoa não encontrada");
+        }
        return pessoa;
     }
 
