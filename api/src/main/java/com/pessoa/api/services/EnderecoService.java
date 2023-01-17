@@ -5,9 +5,9 @@ import com.pessoa.api.entities.Endereco;
 import com.pessoa.api.entities.Pessoa;
 import com.pessoa.api.repositories.EnderecoRepository;
 import com.pessoa.api.repositories.PessoaRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +29,6 @@ public class EnderecoService {
         return endereco;
     }
 
-   @Transactional
     public Endereco converteObjetoDto(EnderecoDto enderecoDto, PessoaRepository pessoaRepository){
         Optional<Pessoa> pessoa = pessoaRepository.findById(enderecoDto.idPessoa());
         return new Endereco(enderecoDto.logradouro(),
