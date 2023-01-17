@@ -5,5 +5,6 @@ public record EnderecoDto(
         int cep,
         String numero,
         String cidade,
-        Long idPessoa) {
+        Long idPessoa,
+        boolean enderecoPrincipal) {
 }

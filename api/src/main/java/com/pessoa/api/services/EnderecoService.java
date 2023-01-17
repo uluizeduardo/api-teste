@@ -6,11 +6,9 @@ import com.pessoa.api.entities.Pessoa;
 import com.pessoa.api.repositories.EnderecoRepository;
 import com.pessoa.api.repositories.PessoaRepository;
 import jakarta.transaction.Transactional;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +24,7 @@ public class EnderecoService {
 
     @Transactional
     public Endereco cadastrarEndereco(EnderecoDto enderecoDto){
+        verificaEnderecoPrincipal(enderecoDto);
         Endereco endereco = enderecoRepository.save(converteObjetoDto(enderecoDto, pessoaRepository));
         return endereco;
     }
@@ -37,7 +36,8 @@ public class EnderecoService {
                             enderecoDto.cep(),
                             enderecoDto.numero(),
                             enderecoDto.cidade(),
-                            pessoa.get());
+                            pessoa.get(),
+                            enderecoDto.enderecoPrincipal());
     }
 
     public Endereco buscarEnderecoPorId(Long id) {
@@ -58,6 +58,18 @@ public class EnderecoService {
                     .collect(Collectors.toList());
         }else{
             return null;
+        }
+    }
+
+    public void verificaEnderecoPrincipal(EnderecoDto enderecoDto){
+        Endereco enderecoAntesDeSalvar = converteObjetoDto(enderecoDto, pessoaRepository);
+        if(enderecoAntesDeSalvar.getEnderecoPrincipal().equals(true)){
+            List<Endereco> listaDeEnderecos = buscarEnderecosPessoa(enderecoAntesDeSalvar.getPessoa().getId());
+            for (Endereco enderecosDaPesoa : listaDeEnderecos){
+                if (enderecosDaPesoa.getEnderecoPrincipal().equals(true)) {
+                    enderecosDaPesoa.setEnderecoPrincipal(false);
+                }
+            }
         }
     }
 }

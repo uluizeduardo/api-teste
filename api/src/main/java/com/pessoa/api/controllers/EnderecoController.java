@@ -3,7 +3,6 @@ package com.pessoa.api.controllers;
 
 import com.pessoa.api.dto.EnderecoDto;
 import com.pessoa.api.entities.Endereco;
-import com.pessoa.api.entities.Pessoa;
 import com.pessoa.api.repositories.EnderecoRepository;
 import com.pessoa.api.repositories.PessoaRepository;
 import com.pessoa.api.services.EnderecoService;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/endereco")
